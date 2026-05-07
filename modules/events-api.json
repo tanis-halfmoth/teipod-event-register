@@ -1,0 +1,194 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "version": "1.0.0",
+        "title": "TEIpod - Events API",
+        "description": "Endpoints to browse and search the local events files"
+    },
+    "servers": [
+        {
+            "description": "Endpoint for testing on localhost",
+            "url": "/exist/apps/TEIpod"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            },
+            "cookieAuth": {
+                "type": "apiKey",
+                "name": "teipublisher.com.login",
+                "in": "cookie"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "view",
+            "description": "HTML templates"
+        },
+        {
+            "name": "registers",
+            "description": "Register API endpoints"
+        },
+        {
+            "name": "static",
+            "description": "Static generator API endpoints"
+        }
+    ],
+    "paths": {
+        "/events": {
+            "get": {
+				"summary": "Landing page for events",
+				"tags": ["view"],
+				"operationId": "vapi:html",
+				"x-error-handler": "vapi:handle-error",
+				"parameters": [
+					{
+						"name": "file",
+						"in": "query",
+						"schema": {
+							"type": "string",
+                            "default": "events"
+						}
+					},
+					{
+                        "name": "search",
+                        "in": "query",
+                        "schema":{
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "odd",
+                        "in": "query",
+                        "schema":{
+                            "type": "string"
+                        }
+                    }				
+				],
+				"responses": {
+					"200": {
+						"description": "HTML of the page",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "The document was not found",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+        },
+        "/api/events": {
+            "get": {
+                "summary": "List events",
+                "description": "Retrieve list of events in format required by pb-split-list",
+				"tags": ["registers"],
+                "operationId": "revent:events-categories",
+                "parameters": [
+					{
+						"name": "category",
+						"in": "query",
+						"schema": {
+							"type": "string"
+						}
+					},
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 500
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema":{
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "odd",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Events to display",
+                        "content": {
+                            "application/json": {
+                                "schema":{
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+		"/api/events/all": {
+            "get": {
+                "summary": "List all events",
+				"tags": ["registers"],
+                "operationId": "revent:events-all",
+				"responses": {
+                    "200": {
+                        "description": "List of all events as JSON array",
+                        "content": {
+                            "application/json": {
+                                "schema":{
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    }
+				}
+			}			
+		},
+		"/api/events/timeline": {
+			"get": {
+				"summary": "Get json events for pb-timeline",
+				"tags": ["registers"],
+				"operationId": "revent:events-timeline",
+				"responses": {
+					"200": {
+						"description": "All events as json array",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+    },
+    "security": [
+        {
+            "cookieAuth": []
+        },
+        {
+            "basicAuth": []
+        }
+    ]
+}

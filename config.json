@@ -1,0 +1,27 @@
+{
+    "label": "TEIpod",
+    "odds": [
+        "teipod.odd"
+    ],
+    "api": [
+        {
+            "spec": "events-api.json",
+            "prefix": "revent",
+            "id": "http://teipublisher.com/api/registers/event",
+            "path": "events-api.xql"
+        }
+    ],
+    "menu": {
+        "items": [
+            {
+                "url": "events",
+                "id": "Events"
+            }
+        ]
+    },
+    "features": {
+        "register": {
+            "enabled": true
+        }
+    }
+}

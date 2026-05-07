@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div class="events">
+    ---json
+    {
+        "templating": {
+            "extends": "templates/layouts/content.html"
+        },
+        "features": {
+            "toolbar": {
+                "navigation": false
+            },
+            "upload": {
+                "enabled": false
+            }
+        },
+        "styles": [
+            "resources/css/timeline.css",
+            "resources/css/registers-theme.css",
+            "resources/css/palette-teipod.css",
+            "resources/css/registers.css"
+        ],
+        "theme": {
+            "layout": {
+                "footer": {
+                    "mobile": {
+                        "enabled": true
+                    }
+                }
+            }
+        }
+    }
+    ---
+    [% template breadcrumb %]
+    <li>
+        <nav aria-label="breadcrumb">
+            <ul>
+                <li>
+                    <a href="[[ $context-path ]]/events">
+                        Events
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </li>
+    [% endtemplate %]
+    
+    <div class="list">
+        <pb-custom-form id="options" auto-submit="input" emit="transcription">
+            <input id="query" type="search" name="search" data-i18n="[placeholder]search.search" value="[[ $request?parameters?search ]]"/>
+        </pb-custom-form>
+        
+        <div class="timeline">
+            <pb-timeline url="api/events/timeline" auto="" subscribe="transcription" emit="timeline">
+                <span slot="label">Timeline: </span>
+            </pb-timeline>
+        </div>
+
+        <pb-split-list url="api/events" subforms="#options" emit="transcription" subscribe="transcription">
+
+        </pb-split-list>
+    </div>
+</div>

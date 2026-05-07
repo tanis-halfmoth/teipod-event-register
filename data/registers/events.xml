@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="teipod.odd" type="application/xml" schematypens="http://www.tei-c.org"?><?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?><?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?><TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="pb-events">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title type="register">Events register</title>
+                <title type="podcast">The Magnus Archives</title>
+            </titleStmt>
+            <publicationStmt>
+                <p/>
+            </publicationStmt>
+            <sourceDesc>
+                <p/>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <standOff>
+        <listEvent>
+            <event when="2012-04-22" xml:id="MAG1-20120422" source="#MAG1">
+                <desc>
+                    MAG 1 statement given
+                </desc>
+                <note>22nd November 2012</note>
+            </event>
+            <event notAfter="1999" notBefore="1990" xml:id="MAG2-90s" source="#MAG2">
+                <desc>
+                    Events of the MAG 2 statement
+                </desc>
+                <note>1990s</note>
+            </event>
+        </listEvent>
+    </standOff>
+</TEI>
